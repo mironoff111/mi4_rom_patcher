@@ -117,10 +117,11 @@ if len (path_rom) > 3:
 	#Создаем новый classes.dex
 	os.system("java -Xmx128M -jar "+path_rom_dir+"/miui_blobs/smali-2.0.6.jar "+path_rom_dir+'/miui_services_out/ -o '+path_rom_dir+'/miui_services_jar/classes.dex')
 	#Архивируем
-	zipf = zipfile.ZipFile(path_rom_dir+'/services.zip', 'w')
+	zipf = zipfile.ZipFile(path_rom_dir+'/services.jar', 'w')
 	zipdir(path_rom_dir+'/miui_services_jar', zipf, "/miui_services_jar")
+	zipf.close()
 	os.remove(path_rom_dir+'/miui_rom_tmp/system/framework/services.jar')	
-	shutil.copyfile(path_rom_dir+'/services.zip', path_rom_dir+'/miui_rom_tmp/system/framework/services.jar')
+	shutil.copyfile(path_rom_dir+'/services.jar', path_rom_dir+'/miui_rom_tmp/system/framework/services.jar')
 	
 	print ("Архивируем...\n")
 	zipf = zipfile.ZipFile(path_rom_dir+'/miui_rom_patched.zip', 'w')
