@@ -97,6 +97,9 @@ if len (path_rom) > 3:
 	ReplaceLineInFile(path_rom_dir+'/miui_rom_tmp/system/etc/mixer_paths_3_2_forte.xml', '<ctl name="TI PA Gain" value="36" />', '<ctl name="TI PA Gain" value="53" />')
 	ReplaceLineInFile(path_rom_dir+'/miui_rom_tmp/system/lib/egl/egl.cfg', '0 0 android\n', '')
 	
+	unzip(path_rom_dir+'/miui_rom_tmp/system/framework/services.jar', path_rom_dir+'/miui_services_jar')
+	os.system("java -jar "+path_rom_dir+"/miui_blobs/baksmali-2.0.6.jar -o classout/ "+path_rom_dir+'/miui_services_jar/classes.dex')
+	
 	print ("Архивируем...\n")
 	
 	zipf = zipfile.ZipFile(path_rom_dir+'/miui_rom_patched.zip', 'w')
