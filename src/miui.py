@@ -118,7 +118,7 @@ if len (path_rom) > 3:
 	os.system("java -Xmx128M -jar "+path_rom_dir+"/miui_blobs/smali-2.0.6.jar "+path_rom_dir+'/miui_services_out/ -o '+path_rom_dir+'/miui_services_jar/classes.dex')
 	#Архивируем
 	zipf = zipfile.ZipFile(path_rom_dir+'/services.zip', 'w')
-	zipdir(path_rom_dir+'/miui_rom_jar', zipf, "/miui_rom_jar")
+	zipdir(path_rom_dir+'/miui_services_jar', zipf, "/miui_services_jar")
 	os.remove(path_rom_dir+'/miui_rom_tmp/system/framework/services.jar')	
 	shutil.copyfile(path_rom_dir+'/services.zip', path_rom_dir+'/miui_rom_tmp/system/framework/services.jar')
 	
@@ -129,8 +129,11 @@ if len (path_rom) > 3:
 	print ("Прибираемся...\n")
 	shutil.rmtree(path_rom_dir+'/miui_rom_tmp')
 	shutil.rmtree(path_rom_dir+'/miui_blobs')
+	shutil.rmtree(path_rom_dir+'/miui_services_jar')
+	shutil.rmtree(path_rom_dir+'/miui_services_out')	
 	os.remove(path_rom_dir+'/miui_blobs.zip')
-	print ("Всё готово, можно шить!\n")
+	os.remove(path_rom_dir+'/services.zip')	
+	print ("Всё готово!\n")
+	sys.exit(0)
 else:
-    print ("Путь не введен!")
-os.system("pause")	
+    sys.exit("MIUI Firmware isn't specified!")
