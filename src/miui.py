@@ -20,6 +20,7 @@ def zipdir(path, ziph):
             ziph.write(os.path.join(root, file), zippath)
 
 def ReplaceLineInFile(fileName, sourceText, replaceText):
+    print ('Патчим '+fileName+'\n')
     file = open(fileName, 'r') #Opens the file in read-mode
     text = file.read() #Reads the file and assigns the value to a variable
     file.close() #Closes the file (read session)
@@ -27,9 +28,9 @@ def ReplaceLineInFile(fileName, sourceText, replaceText):
     file.write(text.replace(sourceText, replaceText)) #replaces all instances of our keyword
     # and writes the whole output when done, wiping over the old contents of the file
     file.close() #Closes the file (write session)
-    print ('Патчим '+fileName+'\n')
+
 			
-print ('MIUI v7 (Mi3W/Mi4) firmware patcher\n')	
+print ('MIUI v7 (Mi3W/4) firmware patcher\n')	
 print ('---by mironoff (2015)---\n\n------------------------\n')
 
 path_rom=input('Введите путь до прошивки:\n\n')
@@ -39,12 +40,9 @@ if len (path_rom) > 3:
 	firmpath = path_rom_dir+'/miui_rom_tmp'
 	unzip(path_rom, firmpath)
 	print ("Немного магии...\n")
-	os.remove(path_rom_dir+'/miui_rom_tmp/system/app/AntHalService.apk')
-	os.remove(path_rom_dir+'/miui_rom_tmp/system/app/AntiSpam.apk')
 	os.remove(path_rom_dir+'/miui_rom_tmp/system/app/BrowserProviderProxy.apk')
 	os.remove(path_rom_dir+'/miui_rom_tmp/system/app/BugReport.apk')
 	os.remove(path_rom_dir+'/miui_rom_tmp/system/app/CellBroadcastReceiver.apk')
-	os.remove(path_rom_dir+'/miui_rom_tmp/system/app/Cit.apk')
 	os.remove(path_rom_dir+'/miui_rom_tmp/system/app/CloudService.apk')
 	os.remove(path_rom_dir+'/miui_rom_tmp/system/app/Email.apk')
 	os.remove(path_rom_dir+'/miui_rom_tmp/system/app/FileExplorer.apk')
@@ -59,10 +57,8 @@ if len (path_rom) > 3:
 	os.remove(path_rom_dir+'/miui_rom_tmp/system/app/MiLinkService.apk')
 	os.remove(path_rom_dir+'/miui_rom_tmp/system/app/MiWallpaper.apk')
 	os.remove(path_rom_dir+'/miui_rom_tmp/system/app/NetworkAssistant2.apk')
-	os.remove(path_rom_dir+'/miui_rom_tmp/system/app/Nfc.apk')		
 	os.remove(path_rom_dir+'/miui_rom_tmp/system/app/NVItem.apk')
 	os.remove(path_rom_dir+'/miui_rom_tmp/system/app/PaymentService.apk')
-	os.remove(path_rom_dir+'/miui_rom_tmp/system/app/Phonesky.apk')	
 	os.remove(path_rom_dir+'/miui_rom_tmp/system/app/PicoTts.apk')
 	os.remove(path_rom_dir+'/miui_rom_tmp/system/app/qcrilmsgtunnel.apk')	
 	os.remove(path_rom_dir+'/miui_rom_tmp/system/app/TSMClient.apk')
@@ -78,15 +74,12 @@ if len (path_rom) > 3:
 	os.remove(path_rom_dir+'/miui_rom_tmp/system/priv-app/com.qualcomm.msapm.apk')	
 	os.remove(path_rom_dir+'/miui_rom_tmp/system/priv-app/GoogleBackupTransport.apk')	
 	os.remove(path_rom_dir+'/miui_rom_tmp/system/priv-app/Mipub.apk')	
-	os.remove(path_rom_dir+'/miui_rom_tmp/system/priv-app/MiuiVoip.apk')	
-	os.remove(path_rom_dir+'/miui_rom_tmp/system/priv-app/OneTimeInitializer.apk')	
-	os.remove(path_rom_dir+'/miui_rom_tmp/system/priv-app/SharedStorageBackup.apk')	
-	os.remove(path_rom_dir+'/miui_rom_tmp/system/priv-app/SmartcardService.apk')		
-	os.remove(path_rom_dir+'/miui_rom_tmp/system/priv-app/Tag.apk')		
+	os.remove(path_rom_dir+'/miui_rom_tmp/system/priv-app/MiuiVoip.apk')		
 	os.remove(path_rom_dir+'/miui_rom_tmp/system/priv-app/Weather.apk')
 	os.remove(path_rom_dir+'/miui_rom_tmp/system/priv-app/WeatherProvider.apk')
 
 	os.remove(path_rom_dir+'/miui_rom_tmp/system/xbin/su')
+	os.remove(path_rom_dir+'/miui_rom_tmp/system/lib/egl/libGLES_android.so')	
 	
 	#BLOBS
 	print ("Грузим blobs...\n")
@@ -98,8 +91,11 @@ if len (path_rom) > 3:
 	shutil.copyfile(path_rom_dir+'/miui_blobs/Superuser.apk', path_rom_dir+'/miui_rom_tmp/system/app/Superuser.apk')
 	shutil.copyfile(path_rom_dir+'/miui_blobs/textinput-tng.apk', path_rom_dir+'/miui_rom_tmp/system/app/textinput-tng.apk')
 	shutil.copyfile(path_rom_dir+'/miui_blobs/libswiftkeysdk-java.so', path_rom_dir+'/miui_rom_tmp/system/lib/libswiftkeysdk-java.so')
+	shutil.copyfile(path_rom_dir+'/miui_blobs/VoiceSearch.apk', path_rom_dir+'/miui_rom_tmp/system/app/VoiceSearch.apk')	
 	
 	ReplaceLineInFile(path_rom_dir+'/miui_rom_tmp/system/etc/gps.conf', 'time.gpsonextra.net', '194.190.168.1')
+	ReplaceLineInFile(path_rom_dir+'/miui_rom_tmp/system/etc/mixer_paths_3_2_forte.xml', '<ctl name="TI PA Gain" value="36" />', '<ctl name="TI PA Gain" value="53" />')
+	ReplaceLineInFile(path_rom_dir+'/miui_rom_tmp/system/lib/egl/egl.cfg', '0 0 android\n', '')
 	
 	print ("Архивируем...\n")
 	
