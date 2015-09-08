@@ -2,6 +2,11 @@
 import os
 import sys
 import zipfile
+try:
+    import zlib
+    mode= zipfile.ZIP_DEFLATED
+except:
+    mode= zipfile.ZIP_STORED
 import shutil
 import re
 from urllib.request import urlretrieve
@@ -124,7 +129,7 @@ if len (path_rom) > 3:
 	shutil.copyfile(path_rom_dir+'/services.jar', path_rom_dir+'/miui_rom_tmp/system/framework/services.jar')
 	
 	print ("Архивируем...\n")
-	zipf = zipfile.ZipFile(path_rom_dir+'/miui_rom_patched.zip', 'w')
+	zipf = zipfile.ZipFile(path_rom_dir+'/miui_rom_patched.zip', 'w', mode)
 	zipdir(path_rom_dir+'/miui_rom_tmp', zipf, "/miui_rom_tmp")
 	zipf.close()
 	print ("Прибираемся...\n")
@@ -133,7 +138,7 @@ if len (path_rom) > 3:
 	shutil.rmtree(path_rom_dir+'/miui_services_jar')
 	shutil.rmtree(path_rom_dir+'/miui_services_out')	
 	os.remove(path_rom_dir+'/miui_blobs.zip')
-	os.remove(path_rom_dir+'/services.zip')	
+	os.remove(path_rom_dir+'/services.jar')	
 	print ("Всё готово!\n")
 	sys.exit(0)
 else:
