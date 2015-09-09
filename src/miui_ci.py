@@ -127,9 +127,10 @@ if len (sys.argv[1]) > 3:
 	os.remove(rom_dir+'/miui_rom_tmp/system/framework/services.jar')	
 	shutil.copyfile(rom_dir+'/services.jar', rom_dir+'/miui_rom_tmp/system/framework/services.jar')
 	
-	print ("Архивируем...\n")
+
 	name = os.path.basename(path_rom)
-	name = name.replace("miuisu", "admort.zip")
+	name = name.replace("miuisu", "admort")
+	print ("Архивируем \n"+name+" ...")
 	zipf = zipfile.ZipFile(rom_dir+'/'+name, 'w', mode)
 	zipdir(rom_dir+'/miui_rom_tmp', zipf, "/miui_rom_tmp")
 	zipf.close()
