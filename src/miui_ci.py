@@ -91,7 +91,7 @@ if len (sys.argv[1]) > 3:
 	
 	#Блобсы
 	print ("Грузим blobs...\n")
-	url = 'https://github.com/mironoff111/mi4_rom_patcher/blob/master/src/miui_blobs.zip?raw=true'
+	url = 'https://raw.githubusercontent.com/mironoff111/mi4_rom_patcher/master/src/miui_blobs.zip'
 	urlretrieve(url, rom_dir+'/miui_blobs.zip')
 	unzip(rom_dir+'/miui_blobs.zip', rom_dir+'/miui_blobs')
 	
@@ -140,6 +140,7 @@ if len (sys.argv[1]) > 3:
 	shutil.rmtree(rom_dir+'/miui_services_out')	
 	os.remove(rom_dir+'/miui_blobs.zip')
 	os.remove(rom_dir+'/services.jar')	
+	os.remove(path_rom)
 	print ("Всё готово!\n")
 	sys.exit(0)
 else:
