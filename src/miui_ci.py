@@ -49,6 +49,7 @@ if len (sys.argv[1]) > 3:
 	#Удаляем китайщину
 	print ("Немного магии...\n")
 	os.remove(rom_dir+'/miui_rom_tmp/system/app/BrowserProviderProxy.apk')
+	os.remove(rom_dir+'/miui_rom_tmp/system/app/fastdormancy.apk')	
 	os.remove(rom_dir+'/miui_rom_tmp/system/app/BugReport.apk')
 	os.remove(rom_dir+'/miui_rom_tmp/system/app/CellBroadcastReceiver.apk')
 	os.remove(rom_dir+'/miui_rom_tmp/system/app/CloudService.apk')
@@ -101,7 +102,7 @@ if len (sys.argv[1]) > 3:
 	shutil.copyfile(rom_dir+'/miui_blobs/libswiftkeysdk-java.so', rom_dir+'/miui_rom_tmp/system/lib/libswiftkeysdk-java.so')
 	#Google VoiceSearch
 	shutil.copyfile(rom_dir+'/miui_blobs/VoiceSearch.apk', rom_dir+'/miui_rom_tmp/system/app/VoiceSearch.apk')	
-	
+	shutil.copyfile(rom_dir+'/miui_blobs/libvoicesearch.so', rom_dir+'/miui_rom_tmp/system/lib/libvoicesearch.so')
 	#Патч ntp 
 	PatchString(rom_dir+'/miui_rom_tmp/system/etc/gps.conf', 'time.gpsonextra.net', '194.190.168.1')
 	#Патч громкости
