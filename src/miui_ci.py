@@ -39,9 +39,9 @@ def PatchString(fileName, sourceText, replaceText):
 print ('MIUI v7 (Mi3W/4) firmware patcher\n')	
 print ('---by mironoff (2015)---\n\n------------------------\n')
 
-path_rom=input('Введите путь до прошивки:\n\n')
+path_rom=sys.argv[1]
 path_rom_dir=os.path.dirname(path_rom)
-if len (path_rom) > 3:
+if len (sys.argv[1]) > 3:
 	#Распаковываем прошивку
 	print ("\nРаспаковка прошивки...\n")	
 	firmpath = path_rom_dir+'/miui_rom_tmp'
