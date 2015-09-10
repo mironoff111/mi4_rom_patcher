@@ -86,7 +86,6 @@ if len (sys.argv[1]) > 3:
 	os.remove(rom_dir+'/miui_rom_tmp/system/media/theme/default/gadgets/weather_4x1.mtz')
 	os.remove(rom_dir+'/miui_rom_tmp/system/media/theme/default/gadgets/weather_4x4.mtz')
 	os.remove(rom_dir+'/miui_rom_tmp/system/media/theme/default/gadgets/weather_clock.mtz')	
-	os.remove(rom_dir+'/miui_rom_tmp/system/media/theme/default/gadgets/weather_4x1.mtz')
 
 	
 	#Блобсы
