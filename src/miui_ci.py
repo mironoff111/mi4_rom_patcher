@@ -54,12 +54,9 @@ if len (sys.argv[1]) > 3:
 	os.remove(rom_dir+'/miui_rom_tmp/system/app/CellBroadcastReceiver.apk')
 	os.remove(rom_dir+'/miui_rom_tmp/system/app/CloudService.apk')
 	os.remove(rom_dir+'/miui_rom_tmp/system/app/Email.apk')
-	os.remove(rom_dir+'/miui_rom_tmp/system/app/FileExplorer.apk')
 	os.remove(rom_dir+'/miui_rom_tmp/system/app/GoogleCalendarSyncAdapter.apk')
 	os.remove(rom_dir+'/miui_rom_tmp/system/app/GoogleContactsSyncAdapter.apk')
 	os.remove(rom_dir+'/miui_rom_tmp/system/app/GoogleKeyboard.apk')
-	os.remove(rom_dir+'/miui_rom_tmp/system/app/GuardProvider.apk')
-	os.remove(rom_dir+'/miui_rom_tmp/system/app/InterfacePermissions.apk')
 	os.remove(rom_dir+'/miui_rom_tmp/system/app/KingSoftCleaner.apk')
 	os.remove(rom_dir+'/miui_rom_tmp/system/app/LiveWallpapersPicker.apk')
 	os.remove(rom_dir+'/miui_rom_tmp/system/app/MiAssistant.apk')
@@ -69,7 +66,6 @@ if len (sys.argv[1]) > 3:
 	os.remove(rom_dir+'/miui_rom_tmp/system/app/PaymentService.apk')
 	os.remove(rom_dir+'/miui_rom_tmp/system/app/qcrilmsgtunnel.apk')	
 	os.remove(rom_dir+'/miui_rom_tmp/system/app/TSMClient.apk')
-	os.remove(rom_dir+'/miui_rom_tmp/system/app/WAPPushManager.apk')
 	os.remove(rom_dir+'/miui_rom_tmp/system/app/XiaomiAccount.apk')
 	os.remove(rom_dir+'/miui_rom_tmp/system/app/XiaomiServiceFramework.apk')	
 	os.remove(rom_dir+'/miui_rom_tmp/system/app/XiaomiVip.apk')
@@ -80,13 +76,18 @@ if len (sys.argv[1]) > 3:
 	os.remove(rom_dir+'/miui_rom_tmp/system/priv-app/com.qualcomm.location.apk')
 	os.remove(rom_dir+'/miui_rom_tmp/system/priv-app/com.qualcomm.msapm.apk')	
 	os.remove(rom_dir+'/miui_rom_tmp/system/priv-app/GoogleBackupTransport.apk')	
-	os.remove(rom_dir+'/miui_rom_tmp/system/priv-app/Mipub.apk')	
 	os.remove(rom_dir+'/miui_rom_tmp/system/priv-app/MiuiVoip.apk')		
 	os.remove(rom_dir+'/miui_rom_tmp/system/priv-app/Weather.apk')
 	os.remove(rom_dir+'/miui_rom_tmp/system/priv-app/WeatherProvider.apk')
 
 	os.remove(rom_dir+'/miui_rom_tmp/system/xbin/su')
 	os.remove(rom_dir+'/miui_rom_tmp/system/lib/egl/libGLES_android.so')	
+	
+	os.remove(rom_dir+'/miui_rom_tmp/system/media/theme/default/gadgets/weather_4x1.mtz')
+	os.remove(rom_dir+'/miui_rom_tmp/system/media/theme/default/gadgets/weather_4x4.mtz')
+	os.remove(rom_dir+'/miui_rom_tmp/system/media/theme/default/gadgets/weather_clock.mtz')	
+	os.remove(rom_dir+'/miui_rom_tmp/system/media/theme/default/gadgets/weather_4x1.mtz')
+
 	
 	#Блобсы
 	print ("Грузим blobs...\n")
@@ -141,6 +142,9 @@ if len (sys.argv[1]) > 3:
 	os.remove(rom_dir+'/miui_blobs.zip')
 	os.remove(rom_dir+'/services.jar')	
 	os.remove(path_rom)
+	#Подписываем
+	os.system("java -Xmx128M -jar "+rom_dir+"/miui_blobs/signapk.jar -w "+rom_dir+"/miui_blobs/testkey.x509.pem "+rom_dir+"/miui_blobs/testkey.pk8 "+rom_dir+'/'+name+' '+rom_dir+'/'+"signed_"+name)
+	os.remove(rom_dir+'/'+name)
 	print ("Всё готово!\n")
 	sys.exit(0)
 else:
