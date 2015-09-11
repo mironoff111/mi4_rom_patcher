@@ -141,8 +141,9 @@ if len (sys.argv[1]) > 3:
 	os.remove(rom_dir+'/services.jar')	
 	#Подписываем
 	print ("Подписываем прошивку...\n")
-	os.system("java -Xmx128M -jar "+rom_dir+"/miui_blobs/signapk.jar "+rom_dir+"/miui_blobs/testkey.x509.pem "+rom_dir+"/miui_blobs/testkey.pk8 "+rom_dir+'/'+name+' '+rom_dir+'/'+"signed_"+name)
-    os.remove(path_rom)
+	os.system("java -Xmx256M -jar "+rom_dir+"/miui_blobs/signapk.jar "+rom_dir+"/miui_blobs/testkey.x509.pem "+rom_dir+"/miui_blobs/testkey.pk8 "+rom_dir+'/'+name+' '+rom_dir+'/'+"signed_"+name)
+	os.remove(path_rom)
+	os.remove(rom_dir+'/'+name)
 	print ("Всё готово!\n")
 	sys.exit(0)
 else:
