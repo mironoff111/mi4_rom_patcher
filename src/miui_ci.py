@@ -129,7 +129,6 @@ if len (sys.argv[1]) > 3:
 
 	name = os.path.basename(path_rom)
 	name = name.replace("miuisu", "admort")
-	print ("Архивируем \n"+name+" ...")
 	zipf = zipfile.ZipFile(rom_dir+'/'+name, 'w', mode)
 	zipdir(rom_dir+'/miui_rom_tmp', zipf, "/miui_rom_tmp")
 	zipf.close()
@@ -140,10 +139,10 @@ if len (sys.argv[1]) > 3:
 	shutil.rmtree(rom_dir+'/miui_services_out')	
 	os.remove(rom_dir+'/miui_blobs.zip')
 	os.remove(rom_dir+'/services.jar')	
-	os.remove(path_rom)
 	#Подписываем
-	os.system("java -Xmx128M -jar "+rom_dir+"/miui_blobs/signapk.jar -w "+rom_dir+"/miui_blobs/testkey.x509.pem "+rom_dir+"/miui_blobs/testkey.pk8 "+rom_dir+'/'+name+' '+rom_dir+'/'+"signed_"+name)
-	os.remove(rom_dir+'/'+name)
+	print ("Подписываем прошивку...\n")
+	os.system("java -Xmx128M -jar "+rom_dir+"/miui_blobs/signapk.jar "+rom_dir+"/miui_blobs/testkey.x509.pem "+rom_dir+"/miui_blobs/testkey.pk8 "+rom_dir+'/'+name+' '+rom_dir+'/'+"signed_"+name)
+    os.remove(path_rom)
 	print ("Всё готово!\n")
 	sys.exit(0)
 else:
