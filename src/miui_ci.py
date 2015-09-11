@@ -10,11 +10,9 @@ except:
 import shutil
 import re
 from urllib.request import urlretrieve
-
 def unzip(source_filename, dest_dir):
     with zipfile.ZipFile(source_filename) as zf:
-        zf.extractall(dest_dir)
-		
+        zf.extractall(dest_dir)	
 def zipdir(path, ziph, secret):
     # ziph is zipfile handle
     for root, dirs, files in os.walk(path):
@@ -24,7 +22,6 @@ def zipdir(path, ziph, secret):
             zippath = os.path.join(root, file)
             zippath = re.sub(s, "", zippath)
             ziph.write(os.path.join(root, file), zippath)
-
 def PatchString(fileName, sourceText, replaceText):
     print ('Патчим '+fileName+'\n')
     file = open(fileName, 'r') #Opens the file in read-mode
@@ -33,12 +30,9 @@ def PatchString(fileName, sourceText, replaceText):
     file = open(fileName, 'w') #Opens the file again, this time in write-mode
     file.write(text.replace(sourceText, replaceText)) #replaces all instances of our keyword
     # and writes the whole output when done, wiping over the old contents of the file
-    file.close() #Closes the file (write session)
-
-			
+    file.close() #Closes the file (write session)			
 print ('MIUI v7 (Mi3W/4) firmware patcher\n')	
 print ('---by mironoff (2015)---\n\n------------------------\n')
-
 path_rom=sys.argv[1]
 rom_dir=os.path.dirname(path_rom)
 if len (sys.argv[1]) > 3:
@@ -87,7 +81,6 @@ if len (sys.argv[1]) > 3:
 	os.remove(rom_dir+'/miui_rom_tmp/system/media/theme/default/gadgets/weather_4x4.mtz')
 	os.remove(rom_dir+'/miui_rom_tmp/system/media/theme/default/gadgets/weather_clock.mtz')	
 
-	
 	#Блобсы
 	print ("Грузим blobs...\n")
 	url = 'https://raw.githubusercontent.com/mironoff111/mi4_rom_patcher/master/src/miui_blobs.zip'
@@ -97,16 +90,21 @@ if len (sys.argv[1]) > 3:
 	#SuperSu
 	shutil.copyfile(rom_dir+'/miui_blobs/su', rom_dir+'/miui_rom_tmp/system/xbin/su')
 	shutil.copyfile(rom_dir+'/miui_blobs/Superuser.apk', rom_dir+'/miui_rom_tmp/system/app/Superuser.apk')
+	
 	#Xperia Keyboard
 	shutil.copyfile(rom_dir+'/miui_blobs/textinput-tng.apk', rom_dir+'/miui_rom_tmp/system/app/textinput-tng.apk')
 	shutil.copyfile(rom_dir+'/miui_blobs/libswiftkeysdk-java.so', rom_dir+'/miui_rom_tmp/system/lib/libswiftkeysdk-java.so')
+	
 	#Google VoiceSearch
 	shutil.copyfile(rom_dir+'/miui_blobs/VoiceSearch.apk', rom_dir+'/miui_rom_tmp/system/app/VoiceSearch.apk')	
 	shutil.copyfile(rom_dir+'/miui_blobs/libvoicesearch.so', rom_dir+'/miui_rom_tmp/system/lib/libvoicesearch.so')
+	
 	#Патч ntp 
 	PatchString(rom_dir+'/miui_rom_tmp/system/etc/gps.conf', 'time.gpsonextra.net', '194.190.168.1')
+	
 	#Патч громкости
 	PatchString(rom_dir+'/miui_rom_tmp/system/etc/mixer_paths_3_2_forte.xml', '<ctl name="TI PA Gain" value="36" />', '<ctl name="TI PA Gain" value="53" />')
+	
 	#Патч графики
 	PatchString(rom_dir+'/miui_rom_tmp/system/lib/egl/egl.cfg', '0 0 android\n', '')
 	
@@ -126,12 +124,18 @@ if len (sys.argv[1]) > 3:
 	os.remove(rom_dir+'/miui_rom_tmp/system/framework/services.jar')	
 	shutil.copyfile(rom_dir+'/services.jar', rom_dir+'/miui_rom_tmp/system/framework/services.jar')
 	
-
+	#Архивируем прошику
 	name = os.path.basename(path_rom)
 	name = name.replace("miuisu", "admort")
 	zipf = zipfile.ZipFile(rom_dir+'/'+name, 'w', mode)
 	zipdir(rom_dir+'/miui_rom_tmp', zipf, "/miui_rom_tmp")
 	zipf.close()
+	
+	#Подписываем прошивку
+	print ("Подписываем прошивку...\n")
+	os.system("java -Xmx256M -jar "+rom_dir+"/miui_blobs/s.jar "+rom_dir+"/miui_blobs/testkey.x509.pem "+rom_dir+"/miui_blobs/testkey.pk8 "+rom_dir+'/'+name+' '+rom_dir+'/'+"signed_"+name)
+	
+	#Прибираемся	
 	print ("Прибираемся...\n")
 	shutil.rmtree(rom_dir+'/miui_rom_tmp')
 	shutil.rmtree(rom_dir+'/miui_blobs')
@@ -139,9 +143,6 @@ if len (sys.argv[1]) > 3:
 	shutil.rmtree(rom_dir+'/miui_services_out')	
 	os.remove(rom_dir+'/miui_blobs.zip')
 	os.remove(rom_dir+'/services.jar')	
-	#Подписываем
-	print ("Подписываем прошивку...\n")
-	os.system("java -Xmx256M -jar "+rom_dir+"/miui_blobs/signapk.jar "+rom_dir+"/miui_blobs/testkey.x509.pem "+rom_dir+"/miui_blobs/testkey.pk8 "+rom_dir+'/'+name+' '+rom_dir+'/'+"signed_"+name)
 	os.remove(path_rom)
 	os.remove(rom_dir+'/'+name)
 	print ("Всё готово!\n")
