@@ -60,7 +60,6 @@ if len (sys.argv[1]) > 3:
 	os.remove(rom_dir+'/miui_rom_tmp/system/app/PaymentService.apk')
 	os.remove(rom_dir+'/miui_rom_tmp/system/app/qcrilmsgtunnel.apk')	
 	os.remove(rom_dir+'/miui_rom_tmp/system/app/TSMClient.apk')
-	os.remove(rom_dir+'/miui_rom_tmp/system/app/XiaomiAccount.apk')
 	os.remove(rom_dir+'/miui_rom_tmp/system/app/XiaomiServiceFramework.apk')	
 	os.remove(rom_dir+'/miui_rom_tmp/system/app/XiaomiVip.apk')
 	os.remove(rom_dir+'/miui_rom_tmp/system/priv-app/BarcodeScanner.apk')	
