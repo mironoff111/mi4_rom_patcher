@@ -62,6 +62,7 @@ if len (sys.argv[1]) > 3:
 	os.remove(rom_dir+'/miui_rom_tmp/system/app/TSMClient.apk')
 	os.remove(rom_dir+'/miui_rom_tmp/system/app/XiaomiServiceFramework.apk')	
 	os.remove(rom_dir+'/miui_rom_tmp/system/app/XiaomiVip.apk')
+	os.remove(rom_dir+'/miui_rom_tmp/system/app/PicoTts.apk')	
 	os.remove(rom_dir+'/miui_rom_tmp/system/priv-app/BarcodeScanner.apk')	
 	os.remove(rom_dir+'/miui_rom_tmp/system/priv-app/Browser.apk')
 	os.remove(rom_dir+'/miui_rom_tmp/system/priv-app/CleanMaster.apk')
@@ -80,6 +81,8 @@ if len (sys.argv[1]) > 3:
 	os.remove(rom_dir+'/miui_rom_tmp/system/media/theme/default/gadgets/weather_4x4.mtz')
 	os.remove(rom_dir+'/miui_rom_tmp/system/media/theme/default/gadgets/weather_clock.mtz')	
 
+	shutil.rmtree(rom_dir+'/miui_rom_tmp/system/tts')	
+	
 	#Блобсы
 	print ("Грузим blobs...\n")
 	url = 'https://raw.githubusercontent.com/mironoff111/mi4_rom_patcher/master/src/miui_blobs.zip'
