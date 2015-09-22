@@ -110,6 +110,21 @@ if len (sys.argv[1]) > 3:
 	#Патч графики
 	PatchString(rom_dir+'/miui_rom_tmp/system/lib/egl/egl.cfg', '0 0 android\n', '')
 	
+	#Расширенное меню перезагрузки
+	shutil.copyfile(rom_dir+'/miui_blobs/powermenu', rom_dir+'/miui_rom_tmp/system/media/theme/default/powermenu')	
+	unzip(rom_dir+'/miui_rom_tmp/system/framework/android.policy.jar', rom_dir+'/miui_policy_jar')	
+	os.system("java -jar "+rom_dir+"/miui_blobs/baksmali-2.0.6.jar -o "+rom_dir+'/miui_policy_out/ '+rom_dir+'/miui_policy_jar/classes.dex')	
+	shutil.copyfile(rom_dir+'/miui_blobs/MiuiGlobalActions$1.smali', rom_dir+'/miui_policy_out/MiuiGlobalActions$1.smali')	
+	#Удаляем старый classes.dex
+	os.remove(rom_dir+'/miui_policy_jar/classes.dex')
+	#Создаем новый classes.dex
+	os.system("java -Xmx128M -jar "+rom_dir+"/miui_blobs/smali-2.0.6.jar "+rom_dir+'/miui_policy_out/ -o '+rom_dir+'/miui_policy_jar/classes.dex')
+	#Архивируем
+	zipf = zipfile.ZipFile(rom_dir+'/android.policy.jar', 'w')
+	zipdir(rom_dir+'/miui_policy_jar', zipf, "/miui_policy_jar")
+	zipf.close()	
+	shutil.copyfile(rom_dir+'/android.policy.jar', rom_dir+'/miui_rom_tmp/system/framework/android.policy.jar')
+	
 	#Эффект телевизора
 	unzip(rom_dir+'/miui_rom_tmp/system/framework/services.jar', rom_dir+'/miui_services_jar')
 	os.system("java -jar "+rom_dir+"/miui_blobs/baksmali-2.0.6.jar -o "+rom_dir+'/miui_services_out/ '+rom_dir+'/miui_services_jar/classes.dex')
@@ -122,8 +137,7 @@ if len (sys.argv[1]) > 3:
 	#Архивируем
 	zipf = zipfile.ZipFile(rom_dir+'/services.jar', 'w')
 	zipdir(rom_dir+'/miui_services_jar', zipf, "/miui_services_jar")
-	zipf.close()
-	os.remove(rom_dir+'/miui_rom_tmp/system/framework/services.jar')	
+	zipf.close()	
 	shutil.copyfile(rom_dir+'/services.jar', rom_dir+'/miui_rom_tmp/system/framework/services.jar')
 	
 	#Архивируем прошику
