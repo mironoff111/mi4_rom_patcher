@@ -114,7 +114,7 @@ if len (sys.argv[1]) > 3:
 	shutil.copyfile(rom_dir+'/miui_blobs/powermenu', rom_dir+'/miui_rom_tmp/system/media/theme/default/powermenu')	
 	unzip(rom_dir+'/miui_rom_tmp/system/framework/android.policy.jar', rom_dir+'/miui_policy_jar')	
 	os.system("java -jar "+rom_dir+"/miui_blobs/baksmali-2.0.6.jar -o "+rom_dir+'/miui_policy_out/ '+rom_dir+'/miui_policy_jar/classes.dex')	
-	shutil.copyfile(rom_dir+'/miui_blobs/MiuiGlobalActions$1.smali', rom_dir+'/miui_policy_out/MiuiGlobalActions$1.smali')	
+	shutil.copyfile(rom_dir+'/miui_blobs/MiuiGlobalActions$1.smali', rom_dir+'/miui_policy_out/com/android/internal/policy/impl/MiuiGlobalActions$1.smali')	
 	#Удаляем старый classes.dex
 	os.remove(rom_dir+'/miui_policy_jar/classes.dex')
 	#Создаем новый classes.dex
