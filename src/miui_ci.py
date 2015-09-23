@@ -162,6 +162,7 @@ if len (sys.argv[1]) > 3:
 	shutil.rmtree(rom_dir+'/miui_policy_out')		
 	os.remove(rom_dir+'/miui_blobs.zip')
 	os.remove(rom_dir+'/services.jar')	
+	os.remove(rom_dir+'/android.policy.jar')	
 	os.remove(path_rom)
 	os.remove(rom_dir+'/'+name)
 	print ("Всё готово!\n")
