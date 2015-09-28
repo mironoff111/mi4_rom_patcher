@@ -121,10 +121,10 @@ if len (sys.argv[1]) > 3:
 	#Создаем новый classes.dex
 	os.system("java -Xmx128M -jar "+rom_dir+"/miui_blobs/smali-2.0.6.jar "+rom_dir+'/miui_policy_out/ -o '+rom_dir+'/miui_policy_jar/classes.dex')
 	#Архивируем
-	zipf = zipfile.ZipFile(rom_dir+'/android.policy.jar', 'w')
+	zipf = zipfile.ZipFile(rom_dir+'/policy.jar', 'w')
 	zipdir(rom_dir+'/miui_policy_jar', zipf, "/miui_policy_jar")
 	zipf.close()	
-	shutil.copyfile(rom_dir+'/android.policy.jar', rom_dir+'/miui_rom_tmp/system/framework/android.policy.jar')
+	shutil.copyfile(rom_dir+'/policy.jar', rom_dir+'/miui_rom_tmp/system/framework/android.policy.jar')
 	
 	#Эффект телевизора
 	unzip(rom_dir+'/miui_rom_tmp/system/framework/services.jar', rom_dir+'/miui_services_jar')
@@ -150,7 +150,7 @@ if len (sys.argv[1]) > 3:
 	
 	#Подписываем прошивку
 	print ("Подписываем прошивку...\n")
-	os.system("java -Xmx256M -jar "+rom_dir+"/miui_blobs/s.jar "+rom_dir+"/miui_blobs/testkey.x509.pem "+rom_dir+"/miui_blobs/testkey.pk8 "+rom_dir+'/'+name+' '+rom_dir+'/'+"signed_"+name)
+	os.system("java -Xmx512M -jar "+rom_dir+"/miui_blobs/s.jar "+rom_dir+"/miui_blobs/testkey.x509.pem "+rom_dir+"/miui_blobs/testkey.pk8 "+rom_dir+'/'+name+' '+rom_dir+'/'+"signed_"+name)
 	
 	#Прибираемся	
 	print ("Прибираемся...\n")
@@ -162,7 +162,7 @@ if len (sys.argv[1]) > 3:
 	shutil.rmtree(rom_dir+'/miui_policy_out')		
 	os.remove(rom_dir+'/miui_blobs.zip')
 	os.remove(rom_dir+'/services.jar')	
-	os.remove(rom_dir+'/android.policy.jar')	
+	os.remove(rom_dir+'/policy.jar')	
 	os.remove(path_rom)
 	os.remove(rom_dir+'/'+name)
 	print ("Всё готово!\n")
