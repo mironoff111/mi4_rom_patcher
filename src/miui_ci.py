@@ -84,9 +84,9 @@ if len (sys.argv[1]) > 3:
 	shutil.rmtree(rom_dir+'/miui_rom_tmp/system/tts')	
 	
 	#Google Services
-	if os.path.isfile(rom_dir+'/miui_rom_tmp/system/priv-app/GmsCore.apk')
+	if os.path.isfile(rom_dir+'/miui_rom_tmp/system/priv-app/GmsCore.apk'):
 		os.remove(rom_dir+'/miui_rom_tmp/system/priv-app/GmsCore.apk')
-	if os.path.isfile(rom_dir+'/miui_rom_tmp/system/priv-app/PreBuiltGmsCore.apk')
+	if os.path.isfile(rom_dir+'/miui_rom_tmp/system/priv-app/PreBuiltGmsCore.apk'):
 		os.remove(rom_dir+'/miui_rom_tmp/system/priv-app/PreBuiltGmsCore.apk')	
 	
 	#Блобсы
