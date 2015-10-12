@@ -83,6 +83,12 @@ if len (sys.argv[1]) > 3:
 
 	shutil.rmtree(rom_dir+'/miui_rom_tmp/system/tts')	
 	
+	#Google Services
+	if os.path.isfile(rom_dir+'/miui_rom_tmp/system/priv-app/GmsCore.apk')
+		os.remove(rom_dir+'/miui_rom_tmp/system/priv-app/GmsCore.apk')
+	if os.path.isfile(rom_dir+'/miui_rom_tmp/system/priv-app/PreBuiltGmsCore.apk')
+		os.remove(rom_dir+'/miui_rom_tmp/system/priv-app/PreBuiltGmsCore.apk')	
+	
 	#Блобсы
 	print ("Грузим blobs...\n")
 	url = 'https://raw.githubusercontent.com/mironoff111/mi4_rom_patcher/master/src/miui_blobs.zip'
@@ -92,6 +98,9 @@ if len (sys.argv[1]) > 3:
 	#SuperSu
 	shutil.copyfile(rom_dir+'/miui_blobs/su', rom_dir+'/miui_rom_tmp/system/xbin/su')
 	shutil.copyfile(rom_dir+'/miui_blobs/Superuser.apk', rom_dir+'/miui_rom_tmp/system/app/Superuser.apk')
+	
+	#Google Services
+	shutil.copyfile(rom_dir+'/miui_blobs/GmsCore.apk', rom_dir+'/miui_rom_tmp/system/priv-app/GmsCore.apk')	
 	
 	#Xperia Keyboard
 	shutil.copyfile(rom_dir+'/miui_blobs/textinput-tng.apk', rom_dir+'/miui_rom_tmp/system/app/textinput-tng.apk')
@@ -126,7 +135,7 @@ if len (sys.argv[1]) > 3:
 	zipf.close()	
 	shutil.copyfile(rom_dir+'/policy.jar', rom_dir+'/miui_rom_tmp/system/framework/android.policy.jar')
 	
-	#Эффект телевизора
+	#Эффект телевизора и анти Update.apk
 	unzip(rom_dir+'/miui_rom_tmp/system/framework/services.jar', rom_dir+'/miui_services_jar')
 	os.system("java -jar "+rom_dir+"/miui_blobs/baksmali-2.0.6.jar -o "+rom_dir+'/miui_services_out/ '+rom_dir+'/miui_services_jar/classes.dex')
 	PatchString(rom_dir+'/miui_services_out/com/android/server/power/DisplayPowerController.smali', 'ELECTRON_BEAM_OFF_ANIMATION_DURATION_MILLIS:I = 0x0', 'ELECTRON_BEAM_OFF_ANIMATION_DURATION_MILLIS:I = 0x190')	
