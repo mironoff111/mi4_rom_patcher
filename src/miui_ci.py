@@ -48,6 +48,7 @@ if len (sys.argv[1]) > 3:
 	os.remove(rom_dir+'/miui_rom_tmp/system/app/CellBroadcastReceiver.apk')
 	os.remove(rom_dir+'/miui_rom_tmp/system/app/CloudService.apk')
 	os.remove(rom_dir+'/miui_rom_tmp/system/app/Email.apk')
+	os.remove(rom_dir+'/miui_rom_tmp/system/app/Metok.apk')	
 	os.remove(rom_dir+'/miui_rom_tmp/system/app/GoogleCalendarSyncAdapter.apk')
 	os.remove(rom_dir+'/miui_rom_tmp/system/app/GoogleContactsSyncAdapter.apk')
 	os.remove(rom_dir+'/miui_rom_tmp/system/app/GoogleKeyboard.apk')
@@ -73,7 +74,7 @@ if len (sys.argv[1]) > 3:
 	os.remove(rom_dir+'/miui_rom_tmp/system/priv-app/MiuiVoip.apk')		
 	os.remove(rom_dir+'/miui_rom_tmp/system/priv-app/Weather.apk')
 	os.remove(rom_dir+'/miui_rom_tmp/system/priv-app/WeatherProvider.apk')
-
+	os.remove(rom_dir+'/miui_rom_tmp/system/priv-app/MiDrop.apk')
 	os.remove(rom_dir+'/miui_rom_tmp/system/xbin/su')
 	os.remove(rom_dir+'/miui_rom_tmp/system/lib/egl/libGLES_android.so')	
 	
@@ -86,8 +87,8 @@ if len (sys.argv[1]) > 3:
 	#Google Services
 	if os.path.isfile(rom_dir+'/miui_rom_tmp/system/priv-app/GmsCore.apk'):
 		os.remove(rom_dir+'/miui_rom_tmp/system/priv-app/GmsCore.apk')
-	if os.path.isfile(rom_dir+'/miui_rom_tmp/system/priv-app/PreBuiltGmsCore.apk'):
-		os.remove(rom_dir+'/miui_rom_tmp/system/priv-app/PreBuiltGmsCore.apk')	
+	if os.path.isfile(rom_dir+'/miui_rom_tmp/system/priv-app/PrebuiltGmsCore.apk'):
+		os.remove(rom_dir+'/miui_rom_tmp/system/priv-app/PrebuiltGmsCore.apk')	
 	
 	#Блобсы
 	print ("Грузим blobs...\n")
@@ -119,23 +120,23 @@ if len (sys.argv[1]) > 3:
 	#Патч графики
 	PatchString(rom_dir+'/miui_rom_tmp/system/lib/egl/egl.cfg', '0 0 android\n', '')
 	
-	#Расширенное меню перезагрузки
-	shutil.copyfile(rom_dir+'/miui_blobs/powermenu', rom_dir+'/miui_rom_tmp/system/media/theme/default/powermenu')	
-	unzip(rom_dir+'/miui_rom_tmp/system/framework/android.policy.jar', rom_dir+'/miui_policy_jar')	
-	os.system("java -jar "+rom_dir+"/miui_blobs/baksmali-2.0.6.jar -o "+rom_dir+'/miui_policy_out/ '+rom_dir+'/miui_policy_jar/classes.dex')	
-	os.remove(rom_dir+'/miui_policy_out/com/android/internal/policy/impl/MiuiGlobalActions$1.smali')
-	shutil.copyfile(rom_dir+'/miui_blobs/MiuiGlobalActions$1.smali', rom_dir+'/miui_policy_out/com/android/internal/policy/impl/MiuiGlobalActions$1.smali')	
-	#Удаляем старый classes.dex
-	os.remove(rom_dir+'/miui_policy_jar/classes.dex')
-	#Создаем новый classes.dex
-	os.system("java -Xmx128M -jar "+rom_dir+"/miui_blobs/smali-2.0.6.jar "+rom_dir+'/miui_policy_out/ -o '+rom_dir+'/miui_policy_jar/classes.dex')
-	#Архивируем
-	zipf = zipfile.ZipFile(rom_dir+'/policy.jar', 'w')
-	zipdir(rom_dir+'/miui_policy_jar', zipf, "/miui_policy_jar")
-	zipf.close()	
-	shutil.copyfile(rom_dir+'/policy.jar', rom_dir+'/miui_rom_tmp/system/framework/android.policy.jar')
+	##Расширенное меню перезагрузки____СЛОМАЛОСЬ КИТАЙЦАМИ 5.10.8
+	#shutil.copyfile(rom_dir+'/miui_blobs/powermenu', rom_dir+'/miui_rom_tmp/system/media/theme/default/powermenu')	
+	#unzip(rom_dir+'/miui_rom_tmp/system/framework/android.policy.jar', rom_dir+'/miui_policy_jar')	
+	#os.system("java -jar "+rom_dir+"/miui_blobs/baksmali-2.0.6.jar -o "+rom_dir+'/miui_policy_out/ '+rom_dir+'/miui_policy_jar/classes.dex')	
+	#os.remove(rom_dir+'/miui_policy_out/com/android/internal/policy/impl/MiuiGlobalActions$1.smali')
+	#shutil.copyfile(rom_dir+'/miui_blobs/MiuiGlobalActions$1.smali', rom_dir+'/miui_policy_out/com/android/internal/policy/impl/MiuiGlobalActions$1.smali')	
+	##Удаляем старый classes.dex
+	#os.remove(rom_dir+'/miui_policy_jar/classes.dex')
+	##Создаем новый classes.dex
+	#os.system("java -Xmx128M -jar "+rom_dir+"/miui_blobs/smali-2.0.6.jar "+rom_dir+'/miui_policy_out/ -o '+rom_dir+'/miui_policy_jar/classes.dex')
+	##Архивируем
+	#zipf = zipfile.ZipFile(rom_dir+'/policy.jar', 'w')
+	#zipdir(rom_dir+'/miui_policy_jar', zipf, "/miui_policy_jar")
+	#zipf.close()	
+	#shutil.copyfile(rom_dir+'/policy.jar', rom_dir+'/miui_rom_tmp/system/framework/android.policy.jar')
 	
-	#Эффект телевизора и анти Update.apk
+	#Эффект телевизора
 	unzip(rom_dir+'/miui_rom_tmp/system/framework/services.jar', rom_dir+'/miui_services_jar')
 	os.system("java -jar "+rom_dir+"/miui_blobs/baksmali-2.0.6.jar -o "+rom_dir+'/miui_services_out/ '+rom_dir+'/miui_services_jar/classes.dex')
 	PatchString(rom_dir+'/miui_services_out/com/android/server/power/DisplayPowerController.smali', 'ELECTRON_BEAM_OFF_ANIMATION_DURATION_MILLIS:I = 0x0', 'ELECTRON_BEAM_OFF_ANIMATION_DURATION_MILLIS:I = 0x190')	
