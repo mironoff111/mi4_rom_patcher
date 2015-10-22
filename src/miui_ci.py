@@ -170,7 +170,6 @@ if len (sys.argv[1]) > 3:
 	os.remove(rom_dir+'/services.jar')	
 	#os.remove(rom_dir+'/policy.jar')	
 	os.remove(path_rom)
-	os.remove(rom_dir+'/'+name)
 	print ("Всё готово!\n")
 	sys.exit(0)
 else:
