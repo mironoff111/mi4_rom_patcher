@@ -42,13 +42,12 @@ if len (sys.argv[1]) > 3:
 	
 	#Удаляем китайщину
 	print ("Немного магии...\n")
-	os.remove(rom_dir+'/miui_rom_tmp/system/app/BrowserProviderProxy.apk')
-	os.remove(rom_dir+'/miui_rom_tmp/system/app/fastdormancy.apk')	
+	os.remove(rom_dir+'/miui_rom_tmp/system/app/BrowserProviderProxy.apk')	
 	os.remove(rom_dir+'/miui_rom_tmp/system/app/BugReport.apk')
 	os.remove(rom_dir+'/miui_rom_tmp/system/app/CellBroadcastReceiver.apk')
-	os.remove(rom_dir+'/miui_rom_tmp/system/app/CloudService.apk')
+	#os.remove(rom_dir+'/miui_rom_tmp/system/app/CloudService.apk')
 	os.remove(rom_dir+'/miui_rom_tmp/system/app/Email.apk')
-	os.remove(rom_dir+'/miui_rom_tmp/system/app/Metok.apk')	
+	#os.remove(rom_dir+'/miui_rom_tmp/system/app/Metok.apk')	
 	os.remove(rom_dir+'/miui_rom_tmp/system/app/GoogleCalendarSyncAdapter.apk')
 	os.remove(rom_dir+'/miui_rom_tmp/system/app/GoogleContactsSyncAdapter.apk')
 	os.remove(rom_dir+'/miui_rom_tmp/system/app/GoogleKeyboard.apk')
@@ -59,7 +58,7 @@ if len (sys.argv[1]) > 3:
 	os.remove(rom_dir+'/miui_rom_tmp/system/app/MiWallpaper.apk')
 	os.remove(rom_dir+'/miui_rom_tmp/system/app/NVItem.apk')
 	os.remove(rom_dir+'/miui_rom_tmp/system/app/PaymentService.apk')
-	os.remove(rom_dir+'/miui_rom_tmp/system/app/qcrilmsgtunnel.apk')	
+	#os.remove(rom_dir+'/miui_rom_tmp/system/app/qcrilmsgtunnel.apk')	
 	os.remove(rom_dir+'/miui_rom_tmp/system/app/TSMClient.apk')
 	os.remove(rom_dir+'/miui_rom_tmp/system/app/XiaomiServiceFramework.apk')	
 	os.remove(rom_dir+'/miui_rom_tmp/system/app/XiaomiVip.apk')
@@ -158,10 +157,7 @@ if len (sys.argv[1]) > 3:
 	zipdir(rom_dir+'/miui_rom_tmp', zipf, "/miui_rom_tmp")
 	zipf.close()
 	
-	#Подписываем прошивку
-	print ("Подписываем прошивку...\n")
-	os.system("java -Xmx512M -jar "+rom_dir+"/miui_blobs/s.jar "+rom_dir+"/miui_blobs/testkey.x509.pem "+rom_dir+"/miui_blobs/testkey.pk8 "+rom_dir+'/'+name+' '+rom_dir+'/'+"signed_"+name)
-	
+
 	#Прибираемся	
 	print ("Прибираемся...\n")
 	shutil.rmtree(rom_dir+'/miui_rom_tmp')
