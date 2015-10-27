@@ -47,21 +47,21 @@ if len (sys.argv[1]) > 3:
 	os.remove(rom_dir+'/miui_rom_tmp/system/app/CellBroadcastReceiver.apk')
 	#os.remove(rom_dir+'/miui_rom_tmp/system/app/CloudService.apk')
 	os.remove(rom_dir+'/miui_rom_tmp/system/app/Email.apk')
-	#os.remove(rom_dir+'/miui_rom_tmp/system/app/Metok.apk')	
+	os.remove(rom_dir+'/miui_rom_tmp/system/app/Metok.apk')	
 	os.remove(rom_dir+'/miui_rom_tmp/system/app/GoogleCalendarSyncAdapter.apk')
 	os.remove(rom_dir+'/miui_rom_tmp/system/app/GoogleContactsSyncAdapter.apk')
 	os.remove(rom_dir+'/miui_rom_tmp/system/app/GoogleKeyboard.apk')
 	os.remove(rom_dir+'/miui_rom_tmp/system/app/KingSoftCleaner.apk')
 	os.remove(rom_dir+'/miui_rom_tmp/system/app/LiveWallpapersPicker.apk')
-	os.remove(rom_dir+'/miui_rom_tmp/system/app/MiAssistant.apk')
-	os.remove(rom_dir+'/miui_rom_tmp/system/app/MiLinkService.apk')
-	os.remove(rom_dir+'/miui_rom_tmp/system/app/MiWallpaper.apk')
+	#os.remove(rom_dir+'/miui_rom_tmp/system/app/MiAssistant.apk')
+	#os.remove(rom_dir+'/miui_rom_tmp/system/app/MiLinkService.apk')
+	#os.remove(rom_dir+'/miui_rom_tmp/system/app/MiWallpaper.apk')
 	os.remove(rom_dir+'/miui_rom_tmp/system/app/NVItem.apk')
 	os.remove(rom_dir+'/miui_rom_tmp/system/app/PaymentService.apk')
-	#os.remove(rom_dir+'/miui_rom_tmp/system/app/qcrilmsgtunnel.apk')	
+	os.remove(rom_dir+'/miui_rom_tmp/system/app/qcrilmsgtunnel.apk')	
 	os.remove(rom_dir+'/miui_rom_tmp/system/app/TSMClient.apk')
-	os.remove(rom_dir+'/miui_rom_tmp/system/app/XiaomiServiceFramework.apk')	
-	os.remove(rom_dir+'/miui_rom_tmp/system/app/XiaomiVip.apk')
+	#os.remove(rom_dir+'/miui_rom_tmp/system/app/XiaomiServiceFramework.apk')	
+	#os.remove(rom_dir+'/miui_rom_tmp/system/app/XiaomiVip.apk')
 	os.remove(rom_dir+'/miui_rom_tmp/system/app/PicoTts.apk')	
 	os.remove(rom_dir+'/miui_rom_tmp/system/priv-app/BarcodeScanner.apk')	
 	os.remove(rom_dir+'/miui_rom_tmp/system/priv-app/Browser.apk')
@@ -70,10 +70,10 @@ if len (sys.argv[1]) > 3:
 	os.remove(rom_dir+'/miui_rom_tmp/system/priv-app/com.qualcomm.location.apk')
 	os.remove(rom_dir+'/miui_rom_tmp/system/priv-app/com.qualcomm.msapm.apk')	
 	os.remove(rom_dir+'/miui_rom_tmp/system/priv-app/GoogleBackupTransport.apk')	
-	os.remove(rom_dir+'/miui_rom_tmp/system/priv-app/MiuiVoip.apk')		
+	#os.remove(rom_dir+'/miui_rom_tmp/system/priv-app/MiuiVoip.apk')		
 	os.remove(rom_dir+'/miui_rom_tmp/system/priv-app/Weather.apk')
 	os.remove(rom_dir+'/miui_rom_tmp/system/priv-app/WeatherProvider.apk')
-	os.remove(rom_dir+'/miui_rom_tmp/system/priv-app/MiDrop.apk')
+	#os.remove(rom_dir+'/miui_rom_tmp/system/priv-app/MiDrop.apk')
 	os.remove(rom_dir+'/miui_rom_tmp/system/xbin/su')
 	os.remove(rom_dir+'/miui_rom_tmp/system/lib/egl/libGLES_android.so')	
 	
@@ -84,8 +84,6 @@ if len (sys.argv[1]) > 3:
 	shutil.rmtree(rom_dir+'/miui_rom_tmp/system/tts')	
 	
 	#Google Services
-	if os.path.isfile(rom_dir+'/miui_rom_tmp/system/priv-app/GmsCore.apk'):
-		os.remove(rom_dir+'/miui_rom_tmp/system/priv-app/GmsCore.apk')
 	if os.path.isfile(rom_dir+'/miui_rom_tmp/system/priv-app/PrebuiltGmsCore.apk'):
 		os.remove(rom_dir+'/miui_rom_tmp/system/priv-app/PrebuiltGmsCore.apk')	
 	
@@ -99,8 +97,6 @@ if len (sys.argv[1]) > 3:
 	shutil.copyfile(rom_dir+'/miui_blobs/su', rom_dir+'/miui_rom_tmp/system/xbin/su')
 	shutil.copyfile(rom_dir+'/miui_blobs/Superuser.apk', rom_dir+'/miui_rom_tmp/system/app/Superuser.apk')
 	
-	#Google Services
-	shutil.copyfile(rom_dir+'/miui_blobs/GmsCore.apk', rom_dir+'/miui_rom_tmp/system/priv-app/GmsCore.apk')	
 	
 	#Xperia Keyboard
 	shutil.copyfile(rom_dir+'/miui_blobs/textinput-tng.apk', rom_dir+'/miui_rom_tmp/system/app/textinput-tng.apk')
